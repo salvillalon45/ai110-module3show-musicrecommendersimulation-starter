@@ -52,11 +52,11 @@ Weakness:
 **TikTok and Youtube** lean heavily on behavioral signals suchs as watch time, replays, shares, and skips in Collaborative Filtering approach. They use content understanding (video, audio, captions, hashtags) so new videos can be tested on small audiences. TikTok's For You feature is very behavior driven. This is why it updates and adapts very fast.
 
 ### What My Version Will Prioritize
-Since I am building a *Music Recommender Simulation*, my system will prioritize using Content-Based Filtering. I can create a User Profile that will store what the user likes. I can use the User Profile to recommend songs to the user. If possible we can also add a Collaborative-Filtering approach. I believe that will require gathering more user data. So for now my version will prioritize a CBF approach. Will see how much it changes.
+Real-world platforms like Spotify and TikTok blend *Collaborative Filtering* (learning from what many users do, such as plays, skips, and shares) with *Content-Based Filtering* (learning from song attributes).
 
-AI - Answer; Need to evaluate
-Real-world platforms like Spotify and TikTok blend collaborative filtering (learning from what many users do, such as plays, skips, and shares) with content-based filtering (learning from song attributes). My simulation will prioritize content-based filtering. It needs no data from other users, and it is easy to explain why a song was recommended. A `UserProfile` stores what the user likes, and each song is scored by how closely its features match that profile. I may add collaborative filtering later, but it would require data from many users.
+For this project, I want to prioritize *Content-Based Filtering*. This is because it needs no data from other users, and it is easy to explain why a song was recommended. This benefits me since currently I do not have a lot of data from other users, but I do have data from songs in the CSV.
 
+A `UserProfile` stores what the user likes, and each song is scored by how closely its features match that profile. I may add Collaborative Filtering later, but it would require data from many users.
 
 ### List the specific features your Song and UserProfile objects will use in your simulation.
 **Song:** `genre`, `mood`, `energy`, `tempo_bpm`, `valence`, `danceability`, `acousticness` (plus `id`, `title`, and `artist` for identification).
