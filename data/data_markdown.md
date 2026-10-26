@@ -1,0 +1,24 @@
+https://www.convertcsv.com/csv-to-markdown.htm
+
+|id |title              |artist        |genre    |mood   |energy|tempo_bpm|valence|danceability|acousticness|
+|---|-------------------|--------------|---------|-------|------|---------|-------|------------|------------|
+|1  |Sunrise City       |Neon Echo     |pop      |happy  |0.82  |118      |0.84   |0.79        |0.18        |
+|2  |Midnight Coding    |LoRoom        |lofi     |chill  |0.42  |78       |0.56   |0.62        |0.71        |
+|3  |Storm Runner       |Voltline      |rock     |intense|0.91  |152      |0.48   |0.66        |0.10        |
+|4  |Library Rain       |Paper Lanterns|lofi     |chill  |0.35  |72       |0.60   |0.58        |0.86        |
+|5  |Gym Hero           |Max Pulse     |pop      |intense|0.93  |132      |0.77   |0.88        |0.05        |
+|6  |Spacewalk Thoughts |Orbit Bloom   |ambient  |chill  |0.28  |60       |0.65   |0.41        |0.92        |
+|7  |Coffee Shop Stories|Slow Stereo   |jazz     |relaxed|0.37  |90       |0.71   |0.54        |0.89        |
+|8  |Night Drive Loop   |Neon Echo     |synthwave|moody  |0.75  |110      |0.49   |0.73        |0.22        |
+|9  |Focus Flow         |LoRoom        |lofi     |focused|0.40  |80       |0.59   |0.60        |0.78        |
+|10 |Rooftop Lights     |Indigo Parade |indie pop|happy  |0.76  |124      |0.81   |0.82        |0.35        |
+|11 |Concrete Crown     |Verse Alley   |hip hop  |confident|0.78  |94       |0.62   |0.85        |0.12        |
+|12 |Dust Road Home     |Willow Creek  |country  |nostalgic|0.52  |102      |0.68   |0.57        |0.74        |
+|13 |Moonlit Sonata     |Elara Voss    |classical|melancholic|0.22  |66       |0.28   |0.25        |0.97        |
+|14 |Island Breeze      |Sol Roots     |reggae   |laid-back|0.55  |84       |0.83   |0.80        |0.45        |
+|15 |Iron Requiem       |Black Cinder  |metal    |angry  |0.97  |168      |0.22   |0.45        |0.04        |
+|16 |Velvet Hours       |Amara Lane    |r&b      |romantic|0.48  |72       |0.64   |0.74        |0.38        |
+|17 |Neon Pulse Drop    |Circuit Saint |edm      |euphoric|0.94  |128      |0.88   |0.90        |0.03        |
+|18 |Porch Light Lullaby|Hollow Pines  |folk     |peaceful|0.30  |76       |0.58   |0.40        |0.93        |
+|19 |Blue Delta Nights  |Muddy Marlow  |blues    |melancholic|0.45  |70       |0.35   |0.52        |0.67        |
+|20 |Fuego en la Calle  |Rumba Sur     |latin    |energetic|0.86  |100      |0.91   |0.92        |0.15        |

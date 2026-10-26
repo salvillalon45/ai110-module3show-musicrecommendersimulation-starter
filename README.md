@@ -63,6 +63,42 @@ A `UserProfile` stores what the user likes, and each song is scored by how close
 
 **UserProfile:** `favorite_genre`, `favorite_mood`, `target_energy`, and `likes_acoustic`.
 
+### The Algorithm Recipe
+This is the scoring weights that will be used against comparing songs:
+```json
+"weights": {
+    "genre": 2.0,
+    "mood": 1.0,
+    "energy": 2.0,
+    "tempo": 1.0,
+    "acousticness": 1.0,
+    "valence": 0.5,
+    "danceability": 0.5,
+}
+```
+
+**Calculating Score Notes**
+
+- Categorical (genre, mood): 1 for a match, 0 otherwise.
+- Numeric: `1 - abs(song - target)`. For tempo, divide the difference by about 100 first so that it can be a number between `0 - 1`.
+- Score: `sum(weight × feature_score) / sum(weights)`. This gives a 0–1 score.
+- Output: Rank all songs by score and return the top N, with a short explanation of the top features.
+
+
+**Potential Biases Notes**
+
+- The system may over prioritize genre so a song that matches the user's mood and numeric taste can rank below a weaker song in the right genre.
+
+- Exact match moods ignore related moods (for example "focused" vs "chill").
+
+- Mood overlaps with energy, tempo, and acousticness so it can be counted twice.
+
+- Currently the profile only holds on favorite genre and mood so it cannot capture mixed taste (going to see if this can be change to support mixed taste).
+
+- The system will be use *Content-Based Filtering* so it will look onl at song attributes to determine what the user likes.
+
+- This is a small dataset which might favor some profile over others.
+
 Some prompts to answer:
 
 - What features does each `Song` use in your system
