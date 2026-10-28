@@ -68,14 +68,68 @@ def load_songs(csv_path: str) -> List[Dict]:
     print(f"Loaded {len(songs)} songs from {csv_path}")
     return songs
 
+DEFAULT_WEIGHTS = {
+    "genre": 2.0,
+    "mood": 1.0,
+    "energy": 2.0,
+    "tempo": 1.0,
+    "acousticness": 1.0,
+    "valence": 0.5,
+    "danceability": 0.5,
+}
+
+CATEGORICAL_FEATURES = ["genre", "mood"]
+
+# user preference key -> song dict field
+NUMERIC_FEATURES = {
+    "energy": "energy",
+    "tempo": "tempo_bpm",
+    "acousticness": "acousticness",
+    "valence": "valence",
+    "danceability": "danceability",
+}
+
 def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
     """
     Scores a single song against user preferences.
     Required by recommend_songs() and src/main.py
     """
-    # TODO: Implement scoring logic using your Algorithm Recipe from Phase 2.
-    # Expected return format: (score, reasons)
-    return []
+    weights = user_prefs.get("weights", DEFAULT_WEIGHTS)
+
+    total_points = 0.0
+    total_weight = 0.0
+    reasons = []
+
+    # Categorical features: 1 for a match, 0 otherwise
+    for feature in CATEGORICAL_FEATURES:
+        if feature not in user_prefs:
+            continue
+        weight = weights.get(feature, 0.0)
+        total_weight += weight
+        if song[feature] == user_prefs[feature]:
+            total_points += weight
+            reasons.append(f"{feature} match (+{weight:.1f})")
+
+    # Numeric features: 1 - abs(song - target), tempo difference scaled by 100
+    for feature, song_field in NUMERIC_FEATURES.items():
+        if feature not in user_prefs:
+            continue
+        weight = weights.get(feature, 0.0)
+        difference = abs(song[song_field] - user_prefs[feature])
+        if feature == "tempo":
+            difference = difference / 100
+        feature_score = max(0.0, 1 - difference)
+
+        points = weight * feature_score
+        total_points += points
+        total_weight += weight
+        reasons.append(f"{feature} closeness (+{points:.2f} of {weight:.1f})")
+
+    if total_weight == 0:
+        return 0.0, reasons
+
+    score = total_points / total_weight
+    return score, reasons
 
 def recommend_songs(user_prefs: Dict, songs: List[Dict], k: int = 5) -> List[Tuple[Dict, float, str]]:
     """
