@@ -92,6 +92,21 @@ NUMERIC_FEATURES = {
 def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
     """
     Scores a single song against user preferences.
+
+    Categorical features (genre, mood) score 1 on a match and 0 otherwise.
+    Numeric features (energy, tempo, acousticness, valence, danceability)
+    score 1 - abs(song - target), with the tempo difference divided by 100
+    and every feature score clamped to a minimum of 0.
+
+    Only features present in user_prefs are scored. Each feature score is
+    multiplied by its weight (user_prefs["weights"] if given, otherwise
+    DEFAULT_WEIGHTS), and the sum is divided by the total weight of the
+    scored features so the final score falls between 0 and 1.
+
+    Returns:
+        (score, reasons), where reasons is a list of strings such as
+        "genre match (+2.0)" or "energy closeness (+1.96 of 2.0)".
+
     Required by recommend_songs() and src/main.py
     """
     weights = user_prefs.get("weights", DEFAULT_WEIGHTS)
@@ -134,6 +149,14 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
 def recommend_songs(user_prefs: Dict, songs: List[Dict], k: int = 5) -> List[Tuple[Dict, float, str]]:
     """
     Functional implementation of the recommendation logic.
+
+    Scores every song with score_song(), sorts them from highest to lowest
+    score, and returns the top k.
+
+    Returns:
+        A list of (song_dict, score, explanation) tuples, where explanation
+        is the song's scoring reasons joined into one comma-separated string.
+
     Required by src/main.py
     """
     scored_songs = []
