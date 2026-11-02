@@ -102,6 +102,45 @@ Prompts:
 
 No need for numeric metrics unless you created some.
 
+### Profiles tested
+
+I tested six profiles. Three were standard and three were adversarial, built to try to trick the scoring logic.
+
+- **High-Energy Pop:** pop, happy, energy 0.9, tempo 128, acousticness 0.1
+- **Chill Lofi:** lofi, chill, energy 0.35, tempo 75, acousticness 0.8
+- **Deep Intense Rock:** rock, intense, energy 0.92, tempo 150, acousticness 0.1
+- **Adversarial: Conflicting:** classical, sad, energy 0.9, valence 0.1 (a mood and a genre that pull away from the energy)
+- **Adversarial: Impossible combo:** metal, peaceful, energy 0.1, tempo 60, acousticness 0.95 (a genre and mood that never occur together)
+- **Adversarial: Out-of-range:** edm, euphoric, energy 1.5, tempo 400 (values outside the normal 0 to 1 range)
+
+The three standard profiles behaved as expected. Each one ranked its own genre and mood match first, with scores of 0.95, 0.99 and 0.99.
+
+### What surprised me
+
+- **Gym Hero kept showing up.** It ranked #2 for both High-Energy Pop and Deep Intense Rock, and it also appeared in the top 5 of two adversarial profiles. It is a pop song with an "intense" mood and energy 0.93, so it gets credit from either the genre or the mood depending on the user.
+- **The conflicting profile put a quiet song first.** A user asking for energy 0.9 got Moonlit Sonata (energy 0.22) at #1 because it was the only classical song. The genre match was worth more than a very large energy gap.
+- **The "impossible" combo wasn't impossible.** The scorer treats genre and mood as separate points to collect, so the metal request was simply ignored and the peaceful mood plus the quiet numeric targets decided the result.
+- **Removing mood changed a lot.** In a test with mood turned off, Gym Hero overtook Sunrise City for High-Energy Pop, and Porch Light Lullaby fell from #1 to #3 in the impossible combo. This showed me that mood was acting as the tiebreaker between songs with similar numbers.
+- **Out-of-range values didn't break anything.** Scores stayed between 0 and 1, but after the exact edm match the scores dropped to 0.16 and below.
+
+### Comparing each pair of profiles
+
+- **High-Energy Pop vs Chill Lofi:** The top 5 lists have no songs in common. Pop wants loud, danceable songs like Sunrise City, and lofi wants quiet acoustic ones like Library Rain. This is what I'd expect from the two opposite ends of the energy scale.
+- **High-Energy Pop vs Deep Intense Rock:** Four of the five songs are shared (Sunrise City, Gym Hero, Neon Pulse Drop, Storm Runner), because both users want high energy. The genre and mood decide the order: Sunrise City is #1 for pop and Storm Runner is #1 for rock. Gym Hero is #2 for both, through the pop genre for one user and the intense mood for the other.
+- **High-Energy Pop vs Adversarial Conflicting:** Both ask for energy 0.9, so Gym Hero, Neon Pulse Drop and Storm Runner appear in both lists. The conflicting user's #1 is Moonlit Sonata because of the classical genre match, which is not a sensible result for a high-energy request.
+- **High-Energy Pop vs Adversarial Impossible Combo:** No songs in common. The impossible profile asks for energy 0.1 and acousticness 0.95, so its list is quiet, acoustic songs. That is the correct reaction to the numeric targets.
+- **High-Energy Pop vs Adversarial Out-of-range:** Three songs overlap (Neon Pulse Drop, Gym Hero, Storm Runner). Neon Pulse Drop is first for the out-of-range user because of the edm and euphoric matches, and the energy of 1.5 pushes toward the loudest songs, which makes sense.
+- **Chill Lofi vs Deep Intense Rock:** No songs in common. Lofi favors energy around 0.35 and rock favors 0.92, so the outputs are completely different, which is valid.
+- **Chill Lofi vs Adversarial Conflicting:** No songs in common. The conflicting profile wants high energy, so it pulls in the loud tracks that lofi users never see.
+- **Chill Lofi vs Adversarial Impossible Combo:** Three shared songs (Library Rain, Spacewalk Thoughts, Porch Light Lullaby). The impossible profile's numeric targets (low energy, slow, acoustic) are close to the lofi profile, so the overlap makes sense. This shows the numeric features were driving the result and the metal genre was ignored.
+- **Chill Lofi vs Adversarial Out-of-range:** No songs in common. Lofi wants quiet songs and the out-of-range profile asks for energy 1.5 and tempo 400, so they are opposites.
+- **Deep Intense Rock vs Adversarial Conflicting:** Four shared songs (Storm Runner, Gym Hero, Neon Pulse Drop, Iron Requiem). Both want high energy. The difference is Moonlit Sonata at #1 for the conflicting user, which only appears because of the classical genre match.
+- **Deep Intense Rock vs Adversarial Impossible Combo:** No songs in common. Rock wants energy 0.92 and the impossible combo wants 0.1.
+- **Deep Intense Rock vs Adversarial Out-of-range:** Four shared songs (Storm Runner, Gym Hero, Neon Pulse Drop, Iron Requiem). Both want very high energy, but the out-of-range profile ranks Neon Pulse Drop first because of its edm and euphoric matches. It then drops to scores of 0.16 or less, while the rock user still gets reasonable scores of 0.5 to 0.7.
+- **Adversarial Conflicting vs Adversarial Impossible Combo:** Only Moonlit Sonata is in both. It is first for the conflicting profile through the classical match and second for the impossible profile through its low energy and high acousticness. The overlap is a coincidence of two different features, not an agreement.
+- **Adversarial Conflicting vs Adversarial Out-of-range:** Four shared songs (Iron Requiem, Storm Runner, Gym Hero, Neon Pulse Drop). Both ask for very high energy, and the difference is again the one song with a genre match (Moonlit Sonata for conflicting, Neon Pulse Drop for out-of-range).
+- **Adversarial Impossible Combo vs Adversarial Out-of-range:** No songs in common. One asks for energy 0.1 and the other asks for 1.5, so the numeric targets are at opposite ends, as I'd expect.
+
 ---
 
 ## 8. Future Work  
