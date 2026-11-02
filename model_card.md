@@ -147,8 +147,21 @@ The three standard profiles behaved as expected. Each one ranked its own genre a
 
 ## 9. Personal Reflection  
 
+**What was your biggest learning moment during this project?**
+
 I learned that Recommendation Systems use a mix of **Collaborative Filtering** and **Content Based Filtering** to recommend content such as TikToks, Reels, music, etc. It is very interesting to learn how the systems capture user behavior. For example, TikTok captures a share or a like on a TikTok video to build a user profile of you. Each of the actions are mapped to a weight dictionary (or something similar) that determines how much weight to give an action. This also opened up how Spotify creates the Discover Weekly and Release Radar playlists. 
 
-It is interesting to learn that I created a model! This gave me an idea of how models such as Claude and OpenAI are created. `recommender.py` contains all the code to recommend songs so I am curious how Claude models are created.  
-
 This assignment changed the way I think about music recommendation apps because now I am more concious of how systems work! I will understand what happens when I like a song. I even discovered I can use Discover Weekly and Release Radar playlists to find new music for me. 
+
+**How did using AI tools help you, and when did you need to double-check them?**
+
+AI tools help me in generating the code and understand concepts **Collaborative Filtering** and **Content Based Filtering**. AI helped me understand how they work.
+I always double check the code that the AI generated. 
+
+**What surprised you about how simple algorithms can still "feel" like recommendations?**
+
+It is interesting to learn that I created a model! This gave me an idea of how models such as Claude and OpenAI are created. `recommender.py` contains all the code to recommend songs so I am curious how Claude models are created. The code in `recommender.py` is nothing magical. It is just loading a csv file, using a dictionary to determine the weights for each feature of a song. Creating a scoring function to score each song and then recommending the songs based on the user profile. This is surprising since it is not much complexity.
+
+**What would you try next if you extended this project?**
+
+It would be great to give the app a UI to allow user interaction and see the recommendations in a better view.
