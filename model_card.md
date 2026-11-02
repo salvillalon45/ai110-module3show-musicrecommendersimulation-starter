@@ -2,35 +2,24 @@
 
 ## 1. Model Name  
 
-Give your model a short, descriptive name.  
-Example: **VibeFinder 1.0**  
+MusicSearch 1.0
 
 ---
 
 ## 2. Intended Use  
 
-Describe what your recommender is designed to do and who it is for. 
+MusicSearch tries to suggest songs a listener will like. 
+It does not predict a rating or a play count. It ranks every song in a small catalog by how well it fits a taste profile. 
 
-Prompts:  
+The listener gives a profile, such as a favorite genre, a mood, and a target energy level. The system returns the top 5 songs, each with a short reason, such as "genre match" or "energy closeness."
 
-- What kind of recommendations does it generate  
-- What assumptions does it make about the user  
-- Is this for real users or classroom exploration  
+**Intended use.** MusicSearch is for classroom exploration. It is a small project to learn how a recommender scores and ranks items. It assumes the listener can describe their taste in a few simple labels, like a genre, a mood, and an energy level. It is meant to be run by students who want to test profiles and see why each song was picked.
+
+**Non-intended use.** It should not be used as a real music app or for real listeners. The catalog has only 20 made-up songs, so it can't serve real tastes. It should not be used to make decisions about people, such as what music to play in a store or what to promote to an artist. It also should not be treated as a fair or complete picture of music taste, since it favors genres and moods that have more songs and matches labels only exactly.
 
 ---
 
 ## 3. How the Model Works  
-
-Explain your scoring approach in simple language.  
-
-Prompts:  
-
-- What features of each song are used (genre, energy, mood, etc.)  
-- What user preferences are considered  
-- How does the model turn those into a score  
-- What changes did you make from the starter logic  
-
-Avoid code here. Pretend you are explaining the idea to a friend who does not program.
 
 The recommender gives every song a score from 0 to 1 that shows how well it matches what a listener likes. A score of 1 is a perfect match and 0 is no match at all.
 
@@ -51,56 +40,55 @@ The recommender gives every song a score from 0 to 1 that shows how well it matc
 
 ## 4. Data  
 
-Describe the dataset the model uses.  
+The catalog is a small file called `songs.csv` with 20 songs. Each song has a `title`, an `artist`, a `genre`, a `mood`, and five number features: `energy`, `tempo` (in beats per minute), `valence`, `danceability`, and `acousticness`. The number features run from 0 to 1, except tempo, which runs from 60 to 168.
 
-Prompts:  
+**Genres and moods.** 
 
-- How many songs are in the catalog  
-- What genres or moods are represented  
-- Did you add or remove data  
-- Are there parts of musical taste missing in the dataset  
+There are *17 genres*. Lofi has 3 songs and pop has 2. The other 15 genres have one song each, such as rock, jazz, metal, and country. 
+
+There are *15 moods*. Chill has 3 songs, and happy, intense, and melancholic have 2 each. The rest have one.
+
+**Energy is uneven.** 
+
+Nine songs have energy of 0.4 or lower, and nine have 0.7 or higher. 
+
+Only two songs sit between 0.5 and 0.6, and none sit between 0.
+
+6 and 0.7. Listeners who want medium energy have very little to choose from.
+
+**Changes to the data.** 
+
+I added 10 more songs based on the assignment instructions.
+
+**What is missing.** 
+
+The catalog has no lyrics, language, release year, or artist popularity. It has no listening history, so it can't learn what a person actually plays. It also has only one or two songs for most genres, so it can't show much variety within a genre. The songs are made up for a class project, so the results say little about real music taste.
 
 ---
 
 ## 5. Strengths  
 
-Where does your system seem to work well  
+**It works well for clear, consistent tastes.** The three standard profiles (High-Energy Pop, Chill Lofi, and Deep Intense Rock) all got a sensible #1 pick. Their top scores were 0.95, 0.99, and 0.99. A listener who knows what they like, and whose genre, mood, and energy all agree, gets good results.
 
-Prompts:  
+**It separates opposite tastes.** The pop and lofi profiles had no songs in common in their top 5. Pop got loud, danceable songs and lofi got quiet, acoustic ones. The scores react the way I would expect when the energy target changes.
 
-- User types for which it gives reasonable results  
-- Any patterns you think your scoring captures correctly  
-- Cases where the recommendations matched your intuition  
+**The runners-up make sense.** After the three lofi songs, Chill Lofi recommended an ambient chill song and a peaceful folk song. These are close neighbors of lofi. For Deep Intense Rock, the next picks were other loud, high-energy songs.
+
+**It helps listeners with a rare mood.** Mood is worth points on its own. A listener who wants "nostalgic" gets Dust Road Home at the top with a score of 0.99, even though its energy is in the quiet middle of the catalog. A "melancholic" listener gets Blue Delta Nights first at 0.97. Without mood, these songs would be buried by the louder or quieter clusters.
+
+**It explains itself.** Every recommendation lists its reasons, such as "genre match" or "energy closeness." This made it easy to find why a song ranked where it did, and it helped me spot the problems in my experiments.
+
+**It is flexible.** A listener can give only the features they care about, and the scorer ignores the rest. The scores stay between 0 and 1 even with odd inputs, like an energy of 1.5.
 
 ---
 
 ## 6. Limitations and Bias 
-
-Where the system struggles or behaves unfairly. 
-
-Prompts:  
-
-- Features it does not consider 
-- Genres or moods that are underrepresented  
-- Cases where the system overfits to one preference  
-- Ways the scoring might unintentionally favor some users  
 
 One weakness I found is that the exact genre and mood matches can override the energy a user actually asked for. Together they are worth 3.0 of the 7.0 total weight, so a song that matches both labels can outrank a song with a much better energy fit. For example, a pop/happy user who asks for energy 0.3 still gets Sunrise City (energy 0.82) at #1 with a score of 0.79, and Gym Hero (energy 0.93) at #2, while the low-energy songs rank lower. The problem is made worse by a small dataset where 15 of the 17 genres have only one song, so a user whose genre or mood appears once gets a single guaranteed match and everything else is ranked on the numbers alone. Labels also only match exactly, so "relaxed" earns no credit for similar songs tagged "chill" or "peaceful", and "indie pop" earns none for a pop fan.
 
 ---
 
 ## 7. Evaluation  
-
-How you checked whether the recommender behaved as expected. 
-
-Prompts:  
-
-- Which user profiles you tested  
-- What you looked for in the recommendations  
-- What surprised you  
-- Any simple tests or comparisons you ran  
-
-No need for numeric metrics unless you created some.
 
 ### Profiles tested
 
@@ -145,23 +133,22 @@ The three standard profiles behaved as expected. Each one ranked its own genre a
 
 ## 8. Future Work  
 
-Ideas for how you would improve the model next.  
+1. **Add more songs.** The catalog has only 20 songs, and most genres have just one. More songs, especially ones with medium energy (0.5 to 0.7), would give more listeners good matches and fewer repeats like Gym Hero.
 
-Prompts:  
+2. **Give partial credit for similar genres and moods.** Right now a label either matches or it doesn't. "Relaxed" earns nothing for a "chill" song, and "pop" earns nothing for "indie pop." Giving a smaller score for close labels would fix this and would stop genre and mood from overriding energy so easily.
 
-- Additional features or preferences  
-- Better ways to explain recommendations  
-- Improving diversity among the top results  
-- Handling more complex user tastes  
+3. **Make the top 5 more varied.** Nothing stops one artist from taking several slots. A simple rule, like at most one song per artist, would help. I could also add one song that is a little outside the listener's profile, so they can find new things.
+
+4. **Handle mixed tastes.** A listener can only give one genre, one mood, and one energy target. Real people like more than one thing, such as calm songs for studying and loud ones for the gym. Letting a profile hold two or three tastes would work better.
+
+5. **Make the explanations clearer.** The reasons show raw points, like "+1.60 of 2.0." Plain sentences, such as "Matches your energy and is also acoustic," would be easier for a normal listener to understand.
 
 ---
 
 ## 9. Personal Reflection  
 
-A few sentences about your experience.  
+I learned that Recommendation Systems use a mix of **Collaborative Filtering** and **Content Based Filtering** to recommend content such as TikToks, Reels, music, etc. It is very interesting to learn how the systems capture user behavior. For example, TikTok captures a share or a like on a TikTok video to build a user profile of you. Each of the actions are mapped to a weight dictionary (or something similar) that determines how much weight to give an action. This also opened up how Spotify creates the Discover Weekly and Release Radar playlists. 
 
-Prompts:  
+It is interesting to learn that I created a model! This gave me an idea of how models such as Claude and OpenAI are created. `recommender.py` contains all the code to recommend songs so I am curious how Claude models are created.  
 
-- What you learned about recommender systems  
-- Something unexpected or interesting you discovered  
-- How this changed the way you think about music recommendation apps  
+This assignment changed the way I think about music recommendation apps because now I am more concious of how systems work! I will understand what happens when I like a song. I even discovered I can use Discover Weekly and Release Radar playlists to find new music for me. 
