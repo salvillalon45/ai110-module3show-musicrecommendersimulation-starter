@@ -147,6 +147,7 @@ You can add more tests in `tests/test_recommender.py`.
 ---
 
 ## Sample Recommendation Output
+
 The output below is based on a User Profile of:
 
 ```python
@@ -194,6 +195,260 @@ Loaded 20 songs from data/songs.csv
       - energy closeness (+1.90 of 2.0)
 
 ==================================================
+```
+
+**Added more User Profiles**
+```bash
+Loaded 20 songs from data/songs.csv
+
+==================================================
+  HIGH-ENERGY POP
+  Prefs: {'genre': 'pop', 'mood': 'happy', 'energy': 0.9, 'tempo': 128, 'acousticness': 0.1}
+==================================================
+
+#1  Sunrise City by Neon Echo
+    Score: 0.95 / 1.00
+    Reasons:
+      - genre match (+2.0)
+      - mood match (+1.0)
+      - energy closeness (+1.84 of 2.0)
+      - tempo closeness (+0.90 of 1.0)
+      - acousticness closeness (+0.92 of 1.0)
+
+#2  Gym Hero by Max Pulse
+    Score: 0.84 / 1.00
+    Reasons:
+      - genre match (+2.0)
+      - energy closeness (+1.94 of 2.0)
+      - tempo closeness (+0.96 of 1.0)
+      - acousticness closeness (+0.95 of 1.0)
+
+#3  Rooftop Lights by Indigo Parade
+    Score: 0.63 / 1.00
+    Reasons:
+      - mood match (+1.0)
+      - energy closeness (+1.72 of 2.0)
+      - tempo closeness (+0.96 of 1.0)
+      - acousticness closeness (+0.75 of 1.0)
+
+#4  Neon Pulse Drop by Circuit Saint
+    Score: 0.55 / 1.00
+    Reasons:
+      - energy closeness (+1.92 of 2.0)
+      - tempo closeness (+1.00 of 1.0)
+      - acousticness closeness (+0.93 of 1.0)
+
+#5  Storm Runner by Voltline
+    Score: 0.53 / 1.00
+    Reasons:
+      - energy closeness (+1.98 of 2.0)
+      - tempo closeness (+0.76 of 1.0)
+      - acousticness closeness (+1.00 of 1.0)
+
+==================================================
+  CHILL LOFI
+  Prefs: {'genre': 'lofi', 'mood': 'chill', 'energy': 0.35, 'tempo': 75, 'acousticness': 0.8}
+==================================================
+
+#1  Library Rain by Paper Lanterns
+    Score: 0.99 / 1.00
+    Reasons:
+      - genre match (+2.0)
+      - mood match (+1.0)
+      - energy closeness (+2.00 of 2.0)
+      - tempo closeness (+0.97 of 1.0)
+      - acousticness closeness (+0.94 of 1.0)
+
+#2  Midnight Coding by LoRoom
+    Score: 0.96 / 1.00
+    Reasons:
+      - genre match (+2.0)
+      - mood match (+1.0)
+      - energy closeness (+1.86 of 2.0)
+      - tempo closeness (+0.97 of 1.0)
+      - acousticness closeness (+0.91 of 1.0)
+
+#3  Focus Flow by LoRoom
+    Score: 0.83 / 1.00
+    Reasons:
+      - genre match (+2.0)
+      - energy closeness (+1.90 of 2.0)
+      - tempo closeness (+0.95 of 1.0)
+      - acousticness closeness (+0.98 of 1.0)
+
+#4  Spacewalk Thoughts by Orbit Bloom
+    Score: 0.66 / 1.00
+    Reasons:
+      - mood match (+1.0)
+      - energy closeness (+1.86 of 2.0)
+      - tempo closeness (+0.85 of 1.0)
+      - acousticness closeness (+0.88 of 1.0)
+
+#5  Porch Light Lullaby by Hollow Pines
+    Score: 0.54 / 1.00
+    Reasons:
+      - energy closeness (+1.90 of 2.0)
+      - tempo closeness (+0.99 of 1.0)
+      - acousticness closeness (+0.87 of 1.0)
+
+==================================================
+  DEEP INTENSE ROCK
+  Prefs: {'genre': 'rock', 'mood': 'intense', 'energy': 0.92, 'tempo': 150, 'acousticness': 0.1}
+==================================================
+
+#1  Storm Runner by Voltline
+    Score: 0.99 / 1.00
+    Reasons:
+      - genre match (+2.0)
+      - mood match (+1.0)
+      - energy closeness (+1.98 of 2.0)
+      - tempo closeness (+0.98 of 1.0)
+      - acousticness closeness (+1.00 of 1.0)
+
+#2  Gym Hero by Max Pulse
+    Score: 0.68 / 1.00
+    Reasons:
+      - mood match (+1.0)
+      - energy closeness (+1.98 of 2.0)
+      - tempo closeness (+0.82 of 1.0)
+      - acousticness closeness (+0.95 of 1.0)
+
+#3  Neon Pulse Drop by Circuit Saint
+    Score: 0.52 / 1.00
+    Reasons:
+      - energy closeness (+1.96 of 2.0)
+      - tempo closeness (+0.78 of 1.0)
+      - acousticness closeness (+0.93 of 1.0)
+
+#4  Iron Requiem by Black Cinder
+    Score: 0.52 / 1.00
+    Reasons:
+      - energy closeness (+1.90 of 2.0)
+      - tempo closeness (+0.82 of 1.0)
+      - acousticness closeness (+0.94 of 1.0)
+
+#5  Sunrise City by Neon Echo
+    Score: 0.49 / 1.00
+    Reasons:
+      - energy closeness (+1.80 of 2.0)
+      - tempo closeness (+0.68 of 1.0)
+      - acousticness closeness (+0.92 of 1.0)
+
+==================================================
+  ADVERSARIAL: CONFLICTING (ENERGY 0.9 + SAD)
+  Prefs: {'genre': 'classical', 'mood': 'sad', 'energy': 0.9, 'valence': 0.1}
+==================================================
+
+#1  Moonlit Sonata by Elara Voss
+    Score: 0.55 / 1.00
+    Reasons:
+      - genre match (+2.0)
+      - energy closeness (+0.64 of 2.0)
+      - valence closeness (+0.41 of 0.5)
+
+#2  Iron Requiem by Black Cinder
+    Score: 0.42 / 1.00
+    Reasons:
+      - energy closeness (+1.86 of 2.0)
+      - valence closeness (+0.44 of 0.5)
+
+#3  Storm Runner by Voltline
+    Score: 0.42 / 1.00
+    Reasons:
+      - energy closeness (+1.98 of 2.0)
+      - valence closeness (+0.31 of 0.5)
+
+#4  Gym Hero by Max Pulse
+    Score: 0.38 / 1.00
+    Reasons:
+      - energy closeness (+1.94 of 2.0)
+      - valence closeness (+0.16 of 0.5)
+
+#5  Neon Pulse Drop by Circuit Saint
+    Score: 0.37 / 1.00
+    Reasons:
+      - energy closeness (+1.92 of 2.0)
+      - valence closeness (+0.11 of 0.5)
+
+==================================================
+  ADVERSARIAL: IMPOSSIBLE GENRE/MOOD COMBO
+  Prefs: {'genre': 'metal', 'mood': 'peaceful', 'energy': 0.1, 'tempo': 60, 'acousticness': 0.95}
+==================================================
+
+#1  Porch Light Lullaby by Hollow Pines
+    Score: 0.63 / 1.00
+    Reasons:
+      - mood match (+1.0)
+      - energy closeness (+1.60 of 2.0)
+      - tempo closeness (+0.84 of 1.0)
+      - acousticness closeness (+0.98 of 1.0)
+
+#2  Moonlit Sonata by Elara Voss
+    Score: 0.53 / 1.00
+    Reasons:
+      - energy closeness (+1.76 of 2.0)
+      - tempo closeness (+0.94 of 1.0)
+      - acousticness closeness (+0.98 of 1.0)
+
+#3  Spacewalk Thoughts by Orbit Bloom
+    Score: 0.52 / 1.00
+    Reasons:
+      - energy closeness (+1.64 of 2.0)
+      - tempo closeness (+1.00 of 1.0)
+      - acousticness closeness (+0.97 of 1.0)
+
+#4  Library Rain by Paper Lanterns
+    Score: 0.47 / 1.00
+    Reasons:
+      - energy closeness (+1.50 of 2.0)
+      - tempo closeness (+0.88 of 1.0)
+      - acousticness closeness (+0.91 of 1.0)
+
+#5  Coffee Shop Stories by Slow Stereo
+    Score: 0.44 / 1.00
+    Reasons:
+      - energy closeness (+1.46 of 2.0)
+      - tempo closeness (+0.70 of 1.0)
+      - acousticness closeness (+0.94 of 1.0)
+
+==================================================
+  ADVERSARIAL: OUT-OF-RANGE VALUES
+  Prefs: {'genre': 'edm', 'mood': 'euphoric', 'energy': 1.5, 'tempo': 400}
+==================================================
+
+#1  Neon Pulse Drop by Circuit Saint
+    Score: 0.65 / 1.00
+    Reasons:
+      - genre match (+2.0)
+      - mood match (+1.0)
+      - energy closeness (+0.88 of 2.0)
+      - tempo closeness (+0.00 of 1.0)
+
+#2  Iron Requiem by Black Cinder
+    Score: 0.16 / 1.00
+    Reasons:
+      - energy closeness (+0.94 of 2.0)
+      - tempo closeness (+0.00 of 1.0)
+
+#3  Gym Hero by Max Pulse
+    Score: 0.14 / 1.00
+    Reasons:
+      - energy closeness (+0.86 of 2.0)
+      - tempo closeness (+0.00 of 1.0)
+
+#4  Storm Runner by Voltline
+    Score: 0.14 / 1.00
+    Reasons:
+      - energy closeness (+0.82 of 2.0)
+      - tempo closeness (+0.00 of 1.0)
+
+#5  Fuego en la Calle by Rumba Sur
+    Score: 0.12 / 1.00
+    Reasons:
+      - energy closeness (+0.72 of 2.0)
+      - tempo closeness (+0.00 of 1.0)
+
+`==================================================
 ```
 
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->

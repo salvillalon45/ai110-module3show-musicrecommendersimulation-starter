@@ -80,10 +80,12 @@ Where the system struggles or behaves unfairly.
 
 Prompts:  
 
-- Features it does not consider  
+- Features it does not consider 
 - Genres or moods that are underrepresented  
 - Cases where the system overfits to one preference  
 - Ways the scoring might unintentionally favor some users  
+
+One weakness I found is that the exact genre and mood matches can override the energy a user actually asked for. Together they are worth 3.0 of the 7.0 total weight, so a song that matches both labels can outrank a song with a much better energy fit. For example, a pop/happy user who asks for energy 0.3 still gets Sunrise City (energy 0.82) at #1 with a score of 0.79, and Gym Hero (energy 0.93) at #2, while the low-energy songs rank lower. The problem is made worse by a small dataset where 15 of the 17 genres have only one song, so a user whose genre or mood appears once gets a single guaranteed match and everything else is ranked on the numbers alone. Labels also only match exactly, so "relaxed" earns no credit for similar songs tagged "chill" or "peaceful", and "indie pop" earns none for a pop fan.
 
 ---
 
